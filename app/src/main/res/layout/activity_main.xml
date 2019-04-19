@@ -8,10 +8,20 @@
     tools:context="demo.test.kdxfvoice.MainActivity">
     <Button
         android:id="@+id/yuyin"
-        android:text="语音唤醒"
+        android:text="离线语音唤醒"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <Button
+        android:id="@+id/lixianyuyin"
+        android:text="离线语音听写（仅普通话，不支持翻译）"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
+    <Button
+        android:id="@+id/lixianshibie"
+        android:text="离线语音识别（要自定义bnf）"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

@@ -134,11 +134,24 @@ public class HuanxingActivity extends AppCompatActivity {
         @Override
         public void onBeginOfSpeech() {
             Log.d(TAG, "onBeginOfSpeech: -------");
+            //此回调表示系统开启录音机这中间的过程应该在几毫秒内，可以忽略，除非系 统响应很慢
+            Toast.makeText(HuanxingActivity.this, "开始录音", Toast.LENGTH_SHORT).show();
 
         }
 
         @Override
         public void onResult(WakeuperResult wakeuperResult) {
+            /**返回的结果可能为null，请增加判断处理。当出现onError(com.iflytek.cloud.SpeechError)错误，或取消会话时， 可能不会再回调此函数返回结果。
+
+            单次唤醒：在SpeechConstant.KEEP_ALIVE参数设为非持续唤醒时，若录入的音频 与唤醒资源匹配，返回一次结果，并自动停止录音，并结束当次会话。
+
+            持续唤醒：在SpeechConstant.KEEP_ALIVE参数设为持续唤醒时，若录入的音频 与唤醒资源匹配，返回结果，录音继续，会话也在继续，直到应用主动调用 VoiceWakeuper.stopListening()停止录音，或VoiceWakeuper.cancel()取消 会话，或出现onError(com.iflytek.cloud.SpeechError)错误，而导致会话结束为止。即，会多次返回结果——若 录音数据与唤醒资源匹配。
+
+            唤醒识别：通过此函数返回一次唤醒结果，然后再通过onEvent(int, int, int, android.os.Bundle)返回一次识别结果， 并自动停止录音，结束会话。参考onEvent(int, int, int, android.os.Bundle)。
+
+            特定人唤醒注册：根据设置的注册次数，返回 与之相同次数的结果。
+
+            识别采用边录边上传的分次上传音频数据方式，可能在结束录音前，就有结果返回。**/
             Log.d(TAG, "onResult: -------" + wakeuperResult);
             Toast.makeText(HuanxingActivity.this, wakeuperResult.getResultString(), Toast.LENGTH_LONG).show();
             huanxingText.setText(wakeuperResult.getResultString());
@@ -151,7 +164,9 @@ public class HuanxingActivity extends AppCompatActivity {
 
         @Override
         public void onEvent(int i, int i1, int i2, Bundle bundle) {
-            Log.d(TAG, "onEvent: ----");
+
+
+            Log.d(TAG, "onEvent: ----inti"+i+"i1:"+i1+"i2:"+i2+"bundle:"+bundle);
         }
 
         @Override
